@@ -20,7 +20,6 @@ const ContactForm = () => {
   const sendEmail = (e) => {
     e.preventDefault();
 
-    // Use environment variables for EmailJS configuration
     emailjs
       .sendForm(
         process.env.REACT_APP_EMAILJS_SERVICE_ID,
