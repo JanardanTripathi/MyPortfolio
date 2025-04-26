@@ -20,10 +20,16 @@ const ContactForm = () => {
   const sendEmail = (e) => {
     e.preventDefault();
 
+    // Use environment variables for EmailJS configuration
     emailjs
-      .sendForm("service_jadnvus", "template_qcdh7k3", form.current, {
-        publicKey: "Mg5RwXHtJX-QJEauL",
-      })
+      .sendForm(
+        process.env.REACT_APP_EMAILJS_SERVICE_ID,
+        process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+        form.current,
+        {
+          publicKey: process.env.REACT_APP_EMAILJS_PUBLIC_KEY,
+        }
+      )
       .then(
         () => {
           setFormData({ from_name: "", from_email: "", message: "" });
