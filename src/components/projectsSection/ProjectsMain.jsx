@@ -8,28 +8,29 @@ const projects = [
     name: "CineCurate",
     year: "Apr2023",
     align: "right",
-    image: "../../public/images/website-img-1.jpg",
+    image: "/images/website-img-1.jpg",
     link: "https://github.com/JanardanTripathi/Cinecurate-movie-recommendation-website",
   },
   {
     name: "News Junction",
     year: "Sept2023",
     align: "left",
-    image: "../../public/images/website-img-2.webp",
+    image: "/images/website-img-2.webp",
     link: "https://github.com/JanardanTripathi/The-News-Junction",
   },
   {
     name: "Ezymetrics",
     year: "Jan2024",
     align: "right",
-    image: "../../public/images/website-img-3.jpg",
+    image: "/images/website-img-3.jpg", 
     link: "https://github.com/JanardanTripathi/EzyMetrics-Integration",
   },
+  // If you want to add this project later, update the image path properly
   // {
   //   name: "Bank of Luck",
   //   year: "May2024",
   //   align: "left",
-  //   image: "../../public/images/website-img-4.jpg",
+  //   image: "/images/website-img-4.jpg",  // ✅ Correct Path (Remove ../../public)
   //   link: "#",
   // },
 ];
@@ -46,17 +47,16 @@ const ProjectsMain = () => {
         <ProjectsText />
       </motion.div>
       <div className="flex flex-col gap-20 max-w-[900px] mx-auto mt-12">
-        {projects.map((project, index) => {
-          return (
-            <SingleProject
-              key={index}
-              name={project.name}
-              year={project.year}
-              align={project.align}
-              image={project.image}
-            />
-          );
-        })}
+        {projects.map((project, index) => (
+          <SingleProject
+            key={index}
+            name={project.name}
+            year={project.year}
+            align={project.align}
+            image={project.image}
+            link={project.link}
+          />
+        ))}
       </div>
     </div>
   );

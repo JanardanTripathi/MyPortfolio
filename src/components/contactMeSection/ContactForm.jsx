@@ -19,17 +19,15 @@ const ContactForm = () => {
   const sendWhatsApp = (e) => {
     e.preventDefault();
 
-    // Create the WhatsApp link with pre-filled message
-    const phoneNumber = "9219408042"; // Replace with your WhatsApp number (with country code)
+   
+    const phoneNumber = "919219408042";
     const message = `Name: ${formData.from_name}\nEmail: ${formData.from_email}\nMessage: ${formData.message}`;
     const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
-    // Redirect to WhatsApp
     window.open(whatsappLink, "_blank");
 
-    // Reset form and show success message
     setFormData({ from_name: "", from_email: "", message: "" });
-    setSuccessMessage("✅ Message sent successfully! You will be redirected to WhatsApp.");
+    setSuccessMessage("✅ Message sent successfully! Redirecting you to WhatsApp...");
   };
 
   return (
