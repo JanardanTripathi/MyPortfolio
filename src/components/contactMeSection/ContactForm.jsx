@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import emailjs from "@emailjs/browser";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -17,34 +16,26 @@ const ContactForm = () => {
     });
   };
 
-  const sendEmail = (e) => {
+  const sendWhatsApp = (e) => {
     e.preventDefault();
 
-    emailjs
-      .sendForm(
-        process.env.REACT_APP_EMAILJS_SERVICE_ID,
-        process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
-        form.current,
-        {
-          publicKey: process.env.REACT_APP_EMAILJS_PUBLIC_KEY,
-        }
-      )
-      .then(
-        () => {
-          setFormData({ from_name: "", from_email: "", message: "" });
-          setSuccessMessage("✅ Message sent successfully!");
-        },
-        (error) => {
-          console.error("FAILED...", error.text);
-          setSuccessMessage("❌ Failed to send message. Please try again later.");
-        }
-      );
+    // Create the WhatsApp link with pre-filled message
+    const phoneNumber = "9219408042"; // Replace with your WhatsApp number (with country code)
+    const message = `Name: ${formData.from_name}\nEmail: ${formData.from_email}\nMessage: ${formData.message}`;
+    const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+    // Redirect to WhatsApp
+    window.open(whatsappLink, "_blank");
+
+    // Reset form and show success message
+    setFormData({ from_name: "", from_email: "", message: "" });
+    setSuccessMessage("✅ Message sent successfully! You will be redirected to WhatsApp.");
   };
 
   return (
     <div>
       {successMessage && <p className="text-cyan">{successMessage}</p>}
-      <form ref={form} onSubmit={sendEmail} className="flex flex-col gap-4">
+      <form ref={form} onSubmit={sendWhatsApp} className="flex flex-col gap-4">
         <input
           type="text"
           name="from_name"
@@ -76,7 +67,7 @@ const ContactForm = () => {
           type="submit"
           className="w-full rounded-lg border border-cyan text-white h-12 font-bold text-xl hover:bg-darkCyan bg-cyan transition-all duration-500"
         >
-          Send
+          Send via WhatsApp
         </button>
       </form>
     </div>
